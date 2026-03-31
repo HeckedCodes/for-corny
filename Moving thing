@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* prevents scrollbars */
+        }
+
+        #movingImage {
+            position: absolute;
+            width: 100px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<img id="movingImage" src="2026_03_30_0z5_Kleki.png" alt="Click me">
+
+<script>
+    const img = document.getElementById("movingImage");
+
+    let x = 100;
+    let y = 100;
+    let dx = 2; // speed X
+    let dy = 2; // speed Y
+
+    function animate() {
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        x += dx;
+        y += dy;
+
+        // bounce off edges
+        if (x + img.width >= screenWidth || x <= 0) {
+            dx = -dx;
+        }
+        if (y + img.height >= screenHeight || y <= 0) {
+            dy = -dy;
+        }
+
+        img.style.left = x + "px";
+        img.style.top = y + "px";
+
+        requestAnimationFrame(animate);
+    }
+
+    // click event
+    img.addEventListener("click", () => {
+        alert("You clicked the image!");
+    });
+
+    animate();
+</script>
+
+</body>
+</html>
